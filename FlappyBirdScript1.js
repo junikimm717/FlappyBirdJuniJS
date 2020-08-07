@@ -131,7 +131,7 @@ function fail() {
 
 document.addEventListener("keydown", player.keyRegister);
 document.addEventListener("click", player.jump);
-document.addEventListener("touchstart", player.jump);
+document.addEventListener("touchend", player.jump);
 document.getElementById('failmessage').innerHTML = "";
 
 let curob = [];
