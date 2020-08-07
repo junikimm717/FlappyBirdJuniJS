@@ -1,10 +1,11 @@
 
 const motionconst = {
-    acc : 500,
+    acc : 600,
     gr : 300,
     t : 5,
     obmove : 100,
     scale : null,
+    exp : 1/15,
 };
 
 let player = {
@@ -13,7 +14,7 @@ let player = {
     el : document.getElementById('player'),
     gameinterval : null,
     t : 5,
-    jumpspeed : -300,
+    jumpspeed : -400,
     // when key is pressed.
     keyRegister : function () {
         let keyPressed = event.keyCode ? event.keyCode : event.which;
@@ -137,7 +138,6 @@ if ('ontouchstart' in window)
 else
     document.addEventListener("click", player.jump);
 
-
 document.getElementById('failmessage').innerHTML = "";
 
 
@@ -146,9 +146,9 @@ document.getElementById('failmessage').innerHTML = "";
 let curob = [];
 document.getElementById('player').style.top = "230px";
 player.y = 230;
-motionconst.scale = 0.8;
-player.jumpspeed *= motionconst.scale;
-motionconst.acc *= motionconst.scale;
+motionconst.scale = Math.min(screen.width, screen.height)/704;
+player.jumpspeed *= motionconst.scale**motionconst.exp;
+motionconst.acc *= motionconst.scale**motionconst.exp;
 
 if (localStorage.getItem("maxscore") === null)
     localStorage.setItem("maxscore", 0);
