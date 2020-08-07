@@ -27,3 +27,18 @@
     top : 370px;
     left : 0px;
 }
+#scores {
+    position : relative;
+    top : 450px;
+    left : 0px;
+    font-family : verdana;
+    font-size : 20;
+}
+
+#failmessage {
+    position : relative;
+    top : 500px;
+    left : 0px;
+    font-family : verdana;
+    font-size : 30;
+}
