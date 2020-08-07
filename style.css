@@ -1,6 +1,6 @@
 #player {
     position : relative;
-    top : 300px;
+    top : 150px;
     left : 100px;
     background-color : red;
     width : 30px;
@@ -21,4 +21,9 @@
     background-color : black;
     height : 5px;
     width : 600px;
+}
+#startbutton {
+    position : relative;
+    top : 370px;
+    left : 0px;
 }
