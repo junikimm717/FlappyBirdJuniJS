@@ -1,6 +1,6 @@
 
 const motionconst = {
-    acc : 600,
+    acc : 550,
     gr : 300,
     t : 5,
     obmove : 100,
@@ -14,7 +14,7 @@ let player = {
     el : document.getElementById('player'),
     gameinterval : null,
     t : 5,
-    jumpspeed : -400,
+    jumpspeed : -350,
     // when key is pressed.
     keyRegister : function () {
         let keyPressed = event.keyCode ? event.keyCode : event.which;
@@ -132,6 +132,7 @@ function fail() {
 }
 
 document.addEventListener("keydown", player.keyRegister);
+document.getElementById('failmessage').innerHTML = "";
 
 if ('ontouchstart' in window) {
     document.addEventListener("touchstart", player.jump);
@@ -143,11 +144,6 @@ else {
     document.addEventListener("click", player.jump);
     motionconst.scale = 1;
 }
-
-document.getElementById('failmessage').innerHTML = "";
-
-
-
 
 let curob = [];
 document.getElementById('player').style.top = "230px";
