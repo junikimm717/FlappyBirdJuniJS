@@ -1,7 +1,8 @@
 const motionconst = {
-    acc : 500,
+    acc : 450,
     gr : 300,
     t : 5,
+    obmove : 100,
 };
 
 let player = {
@@ -53,13 +54,53 @@ let player = {
 document.addEventListener("keydown", player.keyRegister);
 document.addEventListener("click", player.jump);
 
-class obstacles {
+class obstacle {
     constructor() {
-        this.topint = Math.floor(50 + 200 * Math.random());
-        this.bottomint = topint + 50;
+        this.topint = Math.floor(50 + 175 * Math.random());
+        this.bottomint = this.topint + 75;
+        this.pos = 600;
+        this.reg1 = document.createElement("Div");
+        this.reg2 = document.createElement("Div");
+        this.reg1.style = `
+            position : absolute;
+            top : 0px;
+            left : 600px;
+            background-color : blue;
+            width : 30px;
+            height : ${this.topint}px;
+        `;
+        this.reg2.style = `
+            position : absolute;
+            top : ${this.bottomint}px;
+            left : 600px;
+            background-color : blue;
+            width : 30px;
+            height : ${340 - this.bottomint}px;
+        `;
+        document.body.appendChild(this.reg1);
+        document.body.appendChild(this.reg2);
+        this.move();
     }
-
+    move() {
+        this.interval = setInterval(() => {
+            this.pos -= (motionconst.t/1000) * motionconst.obmove;
+            this.reg1.style.left = this.pos + "px";
+            this.reg2.style.left = this.pos + "px";
+            if (this.pos < 30) {
+                clearInterval(this.interval);
+                this.clearob();
+            }
+        }, motionconst.t);
+    }
+    clearob() {
+        this.reg1.style.visibility = "hidden";
+        this.reg2.style.visibility = "hidden";
+    }
 };
+
+
+
+
 
 
 
