@@ -7,7 +7,7 @@ const motionconst = {
 };
 
 let player = {
-    y : 150,
+    y : 230,
     vy : 0,
     el : document.getElementById('player'),
     gameinterval : null,
@@ -135,8 +135,8 @@ document.addEventListener("touchend", player.jump);
 document.getElementById('failmessage').innerHTML = "";
 
 let curob = [];
-document.getElementById('player').style.top = "150px";
-player.y = 150;
+document.getElementById('player').style.top = "230px";
+player.y = 230;
 
 if (localStorage.getItem("maxscore") === null)
     localStorage.setItem("maxscore", 0);
