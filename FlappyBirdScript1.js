@@ -4,6 +4,7 @@ const motionconst = {
     gr : 300,
     t : 5,
     obmove : 100,
+    scale : null,
 };
 
 let player = {
@@ -130,13 +131,24 @@ function fail() {
 }
 
 document.addEventListener("keydown", player.keyRegister);
-document.addEventListener("click", player.jump);
-document.addEventListener("touchend", player.jump);
+
+if ('ontouchstart' in window)
+    document.addEventListener("touchstart", player.jump);
+else
+    document.addEventListener("click", player.jump);
+
+
 document.getElementById('failmessage').innerHTML = "";
+
+
+
 
 let curob = [];
 document.getElementById('player').style.top = "230px";
 player.y = 230;
+motionconst.scale = 0.8;
+player.jumpspeed *= motionconst.scale;
+motionconst.acc *= motionconst.scale;
 
 if (localStorage.getItem("maxscore") === null)
     localStorage.setItem("maxscore", 0);
