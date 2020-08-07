@@ -109,7 +109,7 @@ class obstacle {
     }
     detect() {
         return ((100 < this.pos && this.pos < 130) &&
-        (this.topint > player.y || this.bottomint < player.y + 30))
+        (this.topint - 10 > player.y || this.bottomint - 10 < player.y + 30))
     }
     clearob() {
         this.reg1.style.visibility = "hidden";
