@@ -5,7 +5,7 @@ const motionconst = {
     t : 5,
     obmove : 100,
     scale : null,
-    exp : 1/9,
+    exp : 1/15,
 };
 
 let player = {
