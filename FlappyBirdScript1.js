@@ -1,6 +1,6 @@
 
 const motionconst = {
-    acc : 550,
+    acc : 600,
     gr : 300,
     t : 5,
     obmove : 100,
@@ -14,7 +14,7 @@ let player = {
     el : document.getElementById('player'),
     gameinterval : null,
     t : 5,
-    jumpspeed : -350,
+    jumpspeed : -450,
     // when key is pressed.
     keyRegister : function () {
         let keyPressed = event.keyCode ? event.keyCode : event.which;
