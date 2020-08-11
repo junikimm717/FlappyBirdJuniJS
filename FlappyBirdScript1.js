@@ -3,7 +3,7 @@ function startgame(pipetime) {
     const motionconst = {
         acc : 550,
         gr : 300,
-        t : 10,
+        t : 5,
         obmove : 100,
         scale : null,
         exp : 1/9,
@@ -136,7 +136,7 @@ function startgame(pipetime) {
         player.y = 300;
         player.el.style.top = "300px";
         console.log("function has been run.");
-        let failmessage = document.createElement("div")
+        let failmessage = document.createElement("Div");
         failmessage.innerHTML = '<h2 id = "failmessage"></h2>';
         document.body.appendChild(failmessage);
 
@@ -145,24 +145,24 @@ function startgame(pipetime) {
     document.body.removeEventListener("keydown", player.keyRegister, true);
     document.body.removeEventListener("click", player.jump, true);
 
-
-    let gamehtml = document.createElement("div");
+    // creating DOM elements.
+    let gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = "topBorder"></div>';
     document.body.appendChild(gamehtml);
 
-    gamehtml = document.createElement("div");
+    gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = "player"></div>';
     document.body.appendChild(gamehtml);
 
-    gamehtml = document.createElement("div");
+    gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = "bottomBorder"></div>';
     document.body.appendChild(gamehtml);
 
-    gamehtml = document.createElement("div");
+    gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = scores></div>';
     document.body.appendChild(gamehtml);
 
-    gamehtml = document.createElement("div");
+    gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<a id = "startbutton" onclick = "startgame(3000)"><button> click to restart </button> </a>';
     document.body.appendChild(gamehtml);
 
@@ -170,17 +170,18 @@ function startgame(pipetime) {
 
     motionconst.gameinterval = pipetime;
 
-    document.body.addEventListener("keydown", player.keyRegister);
+    // creating eventlisteners so that the bird will respond to jumps.
+    document.body.addEventListener("keydown", player.keyRegister, true);
 
 
     if ('ontouchstart' in window) {
-        document.body.addEventListener("touchstart", player.jump);
+        document.body.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
         motionconst.acc *= motionconst.scale**motionconst.exp;
     }
     else {
-        document.body.addEventListener("click", player.jump);
+        document.body.addEventListener("click", player.jump, true);
         motionconst.scale = 1;
     }
 
