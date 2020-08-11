@@ -35,7 +35,7 @@ let imagesrc = {
 };
 
 function createDOM(pipetime) {
-    document.body.innerHTML = "";
+    document.body.innerHTML = " ";
     let gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = "topBorder"></div>';
     document.body.appendChild(gamehtml);
