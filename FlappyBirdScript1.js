@@ -257,6 +257,11 @@ function startgame(pipetime) {
     }, motionconst.geninterval);
 }
 
+if (sessionStorage.getItem("diff") === null)
+    startgame(3000);
+else
+    startgame(sessionStorage.getItem("diff"));
+
 
 
 
