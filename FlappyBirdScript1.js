@@ -90,9 +90,6 @@ function startgame(pipetime) {
         },
         // motions.
         jump : function (event) {
-            if (!'ontouchstart' in window) {
-                soundeffects.jump();
-            }
             player.vy += player.jumpspeed;
             clearInterval(player.gameinterval);
             player.gameinterval = setInterval(player.frame, motionconst.t);
