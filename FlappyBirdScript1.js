@@ -190,7 +190,7 @@ function startgame(pipetime) {
         player.gameover = true;
         document.removeEventListener("keydown", player.keyRegister, true);
         document.removeEventListener("click", player.jump, true);
-        document.removeEventListener("touchstart", player.jump);
+        document.removeEventListener("touchstart", player.jump, true);
         clearInterval(player.gameInterval);
         clearInterval(runner);
         soundeffects.fail();
@@ -205,7 +205,7 @@ function startgame(pipetime) {
     }
     document.removeEventListener("keydown", player.keyRegister, true);
     document.removeEventListener("click", player.jump, true);
-    document.removeEventListener("touchstart", player.jump);
+    document.removeEventListener("touchstart", player.jump, true);
 
     createDOM(pipetime);
     soundeffects.setaudio();
@@ -217,7 +217,6 @@ function startgame(pipetime) {
     // creating eventlisteners so that the bird will respond to jumps.
     document.addEventListener("keydown", player.keyRegister, true);
 
-    document.addEventListener("click", player.jump, true);
     motionconst.scale = 1;
 
     if ('ontouchstart' in window) {
