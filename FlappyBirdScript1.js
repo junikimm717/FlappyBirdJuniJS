@@ -69,7 +69,7 @@ function startgame(pipetime) {
         t : 5,
         obmove : 100,
         scale : null,
-        exp : 1/7,
+        exp : 1/12,
         geninterval : 3000,
         gameover : false,
     };
