@@ -1,11 +1,4 @@
-Features :
+Problems :
 
-1. flappy bird
-
- (can jump and change pictures.)
-
-Game Menu to start game. Browser should store maximum score obtained.
-
-ability to generate new obstacles, Game over sign.
-
-resetting function...
+- favicon error in Heroku.
+- eventlistener not working for click and touch.
