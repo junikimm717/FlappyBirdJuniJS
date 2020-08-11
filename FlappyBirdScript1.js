@@ -226,7 +226,7 @@ function startgame(pipetime) {
         motionconst.scale = Math.min(screen.width, screen.height)/704;
         player.jumpspeed = -400;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
-        motionconst.acc *= motionconst.scale**motionconst.exp * 1.2;
+        motionconst.acc *= motionconst.scale**motionconst.exp * 1.6;
     }
     else {
         document.addEventListener("click", player.jump, true);
