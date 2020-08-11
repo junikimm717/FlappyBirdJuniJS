@@ -224,8 +224,9 @@ function startgame(pipetime) {
     if ('ontouchstart' in window) {
         document.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
+        player.jumpspeed = -400;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
-        motionconst.acc *= motionconst.scale**motionconst.exp * 1.5;
+        motionconst.acc *= motionconst.scale**motionconst.exp * 2.0;
     }
     else {
         document.addEventListener("click", player.jump, true);
