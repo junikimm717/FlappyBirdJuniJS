@@ -218,6 +218,8 @@ function startgame(pipetime) {
     // creating eventlisteners so that the bird will respond to jumps.
     document.body.addEventListener("keydown", player.keyRegister, true);
 
+    document.body.addEventListener("click", player.jump);
+    motionconst.scale = 1;
 
     if ('ontouchstart' in window) {
         document.body.addEventListener("touchstart", player.jump);
