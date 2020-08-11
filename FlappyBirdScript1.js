@@ -189,9 +189,9 @@ function startgame(pipetime) {
         if (player.gameover)
             return;
         player.gameover = true;
-        document.body.removeEventListener("keydown", player.keyRegister, true);
-        document.body.removeEventListener("click", player.jump, true);
-        document.body.removeEventListener("touchstart", player.jump, true);
+        document.removeEventListener("keydown", player.keyRegister, true);
+        document.removeEventListener("click", player.jump, true);
+        document.removeEventListener("touchstart", player.jump, true);
         clearInterval(player.gameInterval);
         clearInterval(runner);
         soundeffects.fail();
@@ -204,9 +204,9 @@ function startgame(pipetime) {
         document.getElementById("failmessage").style.visibility = "visible";
         document.getElementById("failmessage").innerHTML = "Failed! Try again!";
     }
-    document.body.removeEventListener("keydown", player.keyRegister, true);
-    document.body.removeEventListener("click", player.jump, true);
-    document.body.removeEventListener("touchstart", player.jump, true);
+    document.removeEventListener("keydown", player.keyRegister, true);
+    document.removeEventListener("click", player.jump, true);
+    document.removeEventListener("touchstart", player.jump, true);
 
     createDOM(pipetime);
     soundeffects.setaudio();
@@ -216,19 +216,19 @@ function startgame(pipetime) {
     motionconst.gameinterval = pipetime;
 
     // creating eventlisteners so that the bird will respond to jumps.
-    document.body.addEventListener("keydown", player.keyRegister, true);
+    document.addEventListener("keydown", player.keyRegister, true);
 
-    document.body.addEventListener("click", player.jump, true);
+    document.addEventListener("click", player.jump, true);
     motionconst.scale = 1;
 
     if ('ontouchstart' in window) {
-        document.body.addEventListener("touchstart", player.jump, true);
+        document.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
         motionconst.acc *= motionconst.scale**motionconst.exp;
     }
     else {
-        document.body.addEventListener("click", player.jump, true);
+        document.addEventListener("click", player.jump, true);
         motionconst.scale = 1;
     }
 
