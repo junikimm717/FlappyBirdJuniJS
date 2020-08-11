@@ -17,7 +17,19 @@
             light taps.
 
         </p><br>
-
-        <a href = "./FlappyBirdHTML.html"> <button> click here to begin! </button> </a> <br>
+        <h3> choose difficulty below : </h3><br>
+        <button onclick = "initialize(0)"> easy </button>
+        <button onclick = "initialize(1)"> harder </button>
     </body>
+
+    <script>
+        function initialize(x) {
+            let timeinterval = {
+                0 : 3000,
+                1 : 1000,
+            };
+            sessionStorage.setItem("diff", timeinterval[x]);
+            window.open("./FlappyBirdHTML.html");
+        }
+    </script>
 </html>
