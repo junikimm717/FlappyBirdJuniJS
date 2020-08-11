@@ -34,6 +34,8 @@ let imagesrc = {
     bpipe : "./bpipe.png",
 };
 
+localStorage.clear();
+
 function createDOM(pipetime) {
     document.body.innerHTML = "";
     let gamehtml = document.createElement("Div");
