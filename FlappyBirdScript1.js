@@ -82,7 +82,7 @@ function startgame(pipetime) {
         t : 5,
         jumpspeed : -450,
         // when key is pressed.
-        keyRegister : function () {
+        keyRegister : function (event) {
             let keyPressed = event.keyCode ? event.keyCode : event.which;
             if (!(keyPressed === 32 || keyPressed === 87))
                 return;
