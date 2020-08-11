@@ -1,12 +1,75 @@
+let soundeffects = {
+    setaudio: function () {
+        let createhtml = document.createElement("Div");
+        createhtml.innerHTML = `
+        <audio id = "dieSound">
+            <source src = "./hit.mp3" type = "audio/mp3">
+        </audio>
+        <audio id = "jumpSound">
+            <source src = "./wing.mp3" type = "audio/mp3">
+        </audio>
+        <audio id = "pointSound">
+            <source src = "./point.mp3" type = "audio/mp3">
+        </audio>
+        `;
+        document.body.appendChild(createhtml);
+    },
+    fail : function () {
+        document.getElementById("dieSound").volume = 0.5;
+        document.getElementById("dieSound").play();
+    },
+    jump : function() {
+        document.getElementById("jumpSound").volume = 0.5;
+        document.getElementById("jumpSound").play();
+    },
+    point : function() {
+        document.getElementById("pointSound").volume = 0.5;
+        document.getElementById("pointSound").play();
+    },
+};
+
+let imagesrc = {
+    player : "./playerpicture.png",
+    tpipe : "./tpipe.png",
+    bpipe : "./bpipe.png",
+};
+
+function createDOM(pipetime) {
+    document.body.innerHTML = "";
+    let gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = '<div id = "topBorder"></div>';
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = `<div id = "player"> <img src = "${imagesrc.player}" width = "30px" height = "30px"/></div>`;
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = '<div id = "bottomBorder"></div>';
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = '<div id = scores></div>';
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = `<a id = "startbutton" onclick = "startgame(${pipetime})"><button> click to restart </button> </a>`;
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = '<h2 id = "failmessage"></h2>';
+    gamehtml.style.visibility = "hidden";
+    document.body.appendChild(gamehtml);
+}
 
 function startgame(pipetime) {
     const motionconst = {
-        acc : 550,
+        acc : 700,
         gr : 300,
         t : 5,
         obmove : 100,
         scale : null,
-        exp : 1/9,
+        exp : 1/7,
         geninterval : 3000,
         gameover : false,
     };
@@ -17,7 +80,7 @@ function startgame(pipetime) {
         el : document.getElementById('player'),
         gameinterval : null,
         t : 5,
-        jumpspeed : -350,
+        jumpspeed : -450,
         // when key is pressed.
         keyRegister : function () {
             let keyPressed = event.keyCode ? event.keyCode : event.which;
@@ -27,6 +90,7 @@ function startgame(pipetime) {
         },
         // motions.
         jump : function (event) {
+            soundeffects.jump();
             player.vy += player.jumpspeed;
             clearInterval(player.gameinterval);
             player.gameinterval = setInterval(player.frame, motionconst.t);
@@ -70,18 +134,18 @@ function startgame(pipetime) {
                 position : absolute;
                 top : 0px;
                 left : 600px;
-                background-color : blue;
                 width : 30px;
                 height : ${this.topint}px;
             `;
+            this.reg1.innerHTML = `<img src = "${imagesrc.tpipe}" width = "40px" height = "${this.topint}px"/>`;
             this.reg2.style = `
                 position : absolute;
                 top : ${this.bottomint}px;
                 left : 600px;
-                background-color : blue;
                 width : 30px;
                 height : ${340 - this.bottomint}px;
             `;
+            this.reg2.innerHTML = `<img src = "${imagesrc.bpipe}" width = "40px" height = "${340 - this.bottomint}px"/>`;
             document.body.appendChild(this.reg1);
             document.body.appendChild(this.reg2);
             this.move();
@@ -93,6 +157,7 @@ function startgame(pipetime) {
                 this.reg2.style.left = this.pos + "px";
                 if (this.pos < 30) {
                     curscore++;
+                    soundeffects.point();
                     let x = localStorage.getItem("maxscore")
                     localStorage.setItem("maxscore", Math.max(x, curscore));
                     document.getElementById('scores').innerHTML = "score : " + curscore + " maxscore : " +
@@ -129,6 +194,7 @@ function startgame(pipetime) {
         document.body.removeEventListener("touchstart", player.jump, true);
         clearInterval(player.gameInterval);
         clearInterval(runner);
+        soundeffects.fail();
         for (let i = 0; i < curob.length; ++i) {
             curob[i].keepmove = false;
         }
@@ -138,39 +204,12 @@ function startgame(pipetime) {
         document.getElementById("failmessage").style.visibility = "visible";
         document.getElementById("failmessage").innerHTML = "Failed! Try again!";
     }
-    document.body.innerHTML = "";
     document.body.removeEventListener("keydown", player.keyRegister, true);
     document.body.removeEventListener("click", player.jump, true);
     document.body.removeEventListener("touchstart", player.jump, true);
 
-    // creating DOM elements.
-    let gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<div id = "topBorder"></div>';
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<div id = "player"></div>';
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<div id = "bottomBorder"></div>';
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<div id = scores></div>';
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<a id = "startbutton" onclick = "startgame(3000)"><button> click to restart </button> </a>';
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = '<h2 id = "failmessage"></h2>';
-    gamehtml.style.visibility = "hidden";
-    document.body.appendChild(gamehtml);
-
-    gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = `<audio src = ""`
+    createDOM(pipetime);
+    soundeffects.setaudio();
 
     player.el = document.getElementById('player');
 

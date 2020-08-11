@@ -2,7 +2,7 @@
     position : relative;
     top : 230px;
     left : 100px;
-    background-color : red;
+    /*background-color : red;*/
     width : 30px;
     height : 30px;
 }
@@ -37,8 +37,8 @@
 
 #failmessage {
     position : relative;
-    top : 500px;
-    left : 0px;
+    top : 100px;
+    left : 100px;
     font-family : verdana;
     font-size : 30;
 }
