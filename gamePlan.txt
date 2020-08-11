@@ -8,4 +8,4 @@ Game Menu to start game. Browser should store maximum score obtained.
 
 ability to generate new obstacles, Game over sign.
 
-resetting function.
+resetting function...
