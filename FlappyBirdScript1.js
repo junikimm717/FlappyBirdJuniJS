@@ -191,7 +191,7 @@ function startgame(pipetime) {
         player.gameover = true;
         document.removeEventListener("keydown", player.keyRegister, true);
         document.removeEventListener("click", player.jump, true);
-        document.removeEventListener("touchstart", player.jump, true);
+        document.removeEventListener("touchstart", player.jump);
         clearInterval(player.gameInterval);
         clearInterval(runner);
         soundeffects.fail();
@@ -206,7 +206,7 @@ function startgame(pipetime) {
     }
     document.removeEventListener("keydown", player.keyRegister, true);
     document.removeEventListener("click", player.jump, true);
-    document.removeEventListener("touchstart", player.jump, true);
+    document.removeEventListener("touchstart", player.jump);
 
     createDOM(pipetime);
     soundeffects.setaudio();
