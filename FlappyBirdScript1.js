@@ -191,12 +191,12 @@ function startgame(pipetime) {
         if (player.gameover)
             return;
         player.gameover = true;
+        soundeffects.fail();
         document.removeEventListener("keydown", player.keyRegister, true);
         document.removeEventListener("click", player.jump, true);
         document.removeEventListener("touchstart", player.jump, true);
         clearInterval(player.gameInterval);
         clearInterval(runner);
-        soundeffects.fail();
         for (let i = 0; i < curob.length; ++i) {
             curob[i].keepmove = false;
         }
@@ -225,7 +225,7 @@ function startgame(pipetime) {
     if ('ontouchstart' in window) {
         document.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
-        motionconst.acc = 600;
+        motionconst.acc = 625;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
         motionconst.acc *= motionconst.scale**motionconst.exp;
     }
