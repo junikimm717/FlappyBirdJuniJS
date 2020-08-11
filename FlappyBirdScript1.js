@@ -15,11 +15,15 @@ let soundeffects = {
         document.body.appendChild(createhtml);
     },
     fail : function () {
-        document.getElementById("dieSound").volume = 0.5;
+        let x = document.getElementById("diesound");
+        x.volume = 0.5;
+        if ('ontouchstart' in window)
+            x.volume = 0;
         document.getElementById("dieSound").play();
     },
     jump : function() {
-        document.getElementById("jumpSound").volume = 0.5;
+        let x = document.getElementById("jumpSound")
+        x.volume = 0.5;
         document.getElementById("jumpSound").play();
     },
     point : function() {
