@@ -90,6 +90,7 @@ function startgame(pipetime) {
         },
         // motions.
         jump : function (event) {
+            soundeffects.jump();
             player.vy += player.jumpspeed;
             clearInterval(player.gameinterval);
             player.gameinterval = setInterval(player.frame, motionconst.t);
@@ -222,10 +223,8 @@ function startgame(pipetime) {
     if ('ontouchstart' in window) {
         document.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
-        player.jumpspeed = -300;
-        motionconst.acc = 550;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
-        motionconst.acc *= motionconst.scale**motionconst.exp * 1.6;
+        motionconst.acc *= motionconst.scale**motionconst.exp;
     }
     else {
         document.addEventListener("click", player.jump, true);
