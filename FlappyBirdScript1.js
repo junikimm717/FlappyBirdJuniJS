@@ -124,26 +124,24 @@ function startgame(pipetime) {
         if (player.gameover)
             return;
         player.gameover = true;
-        clearInterval(player.gameInterval);
-        clearInterval(runner);
         document.body.removeEventListener("keydown", player.keyRegister, true);
         document.body.removeEventListener("click", player.jump, true);
         document.body.removeEventListener("touchstart", player.jump, true);
+        clearInterval(player.gameInterval);
+        clearInterval(runner);
         for (let i = 0; i < curob.length; ++i) {
             curob[i].keepmove = false;
         }
         curob = [];
         player.y = 300;
         player.el.style.top = "300px";
-        console.log("function has been run.");
-        let failmessage = document.createElement("Div");
-        failmessage.innerHTML = '<h2 id = "failmessage"></h2>';
-        document.body.appendChild(failmessage);
-
+        document.getElementById("failmessage").style.visibility = "visible";
+        document.getElementById("failmessage").innerHTML = "Failed! Try again!";
     }
     document.body.innerHTML = "";
     document.body.removeEventListener("keydown", player.keyRegister, true);
     document.body.removeEventListener("click", player.jump, true);
+    document.body.removeEventListener("touchstart", player.jump, true);
 
     // creating DOM elements.
     let gamehtml = document.createElement("Div");
@@ -165,6 +163,14 @@ function startgame(pipetime) {
     gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<a id = "startbutton" onclick = "startgame(3000)"><button> click to restart </button> </a>';
     document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = '<h2 id = "failmessage"></h2>';
+    gamehtml.style.visibility = "hidden";
+    document.body.appendChild(gamehtml);
+
+    gamehtml = document.createElement("Div");
+    gamehtml.innerHTML = `<audio src = ""`
 
     player.el = document.getElementById('player');
 
