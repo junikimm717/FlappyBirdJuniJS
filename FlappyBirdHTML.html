@@ -10,7 +10,10 @@
     <body> </body>
     <script src = "FlappyBirdScript1.js"></script>
     <script>
-    startgame(sessionStorage.getItem("diff"));
+    if (sessionStorage.getItem("diff") === null)
+        startgame(3000);
+    else
+        startgame(sessionStorage.getItem("diff"));
     </script>
 
 
