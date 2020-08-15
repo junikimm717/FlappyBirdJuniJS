@@ -226,13 +226,13 @@ function startgame(diff) {
 
     let diffstats = {
         0 : function () {
-            motionconst.geninterval = 3000;
+            motionconst.geninterval = 4000;
             motionconst.pipewidth = 10;
             motionconst.acc = 500;
             player.jumpspeed = -320;
         },
         1 : function() {
-            motionconst.geninterval = 2000;
+            motionconst.geninterval = 2700;
             motionconst.pipewidth = 30;
             motionconst.acc = 700;
             player.jumpspeed = -450;
