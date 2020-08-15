@@ -34,7 +34,14 @@ let imagesrc = {
     bpipe : "./bpipe.png",
 };
 
-function createDOM(pipetime) {
+let diffstring = {
+    0 : "easiest",
+    1 : "harder",
+    2 : "impossible",
+};
+
+function createDOM(diff) {
+
     document.body.innerHTML = " ";
     let gamehtml = document.createElement("Div");
     gamehtml.innerHTML = '<div id = "topBorder"></div>';
@@ -53,7 +60,7 @@ function createDOM(pipetime) {
     document.body.appendChild(gamehtml);
 
     gamehtml = document.createElement("Div");
-    gamehtml.innerHTML = `<a id = "startbutton" onclick = "startgame(${pipetime})"><button> click to restart </button> </a>`;
+    gamehtml.innerHTML = `<a id = "startbutton" onclick = "startgame(${diff})"><button> click to restart </button> </a>`;
     document.body.appendChild(gamehtml);
 
     gamehtml = document.createElement("Div");
@@ -62,7 +69,7 @@ function createDOM(pipetime) {
     document.body.appendChild(gamehtml);
 }
 
-function startgame(pipetime) {
+function startgame(diff) {
     const motionconst = {
         acc : 700,
         gr : 300,
@@ -72,6 +79,7 @@ function startgame(pipetime) {
         exp : 1/9,
         geninterval : 3000,
         gameover : false,
+        pipewidth : 30,
     };
 
     let player = {
@@ -136,18 +144,18 @@ function startgame(pipetime) {
                 position : absolute;
                 top : 0px;
                 left : 600px;
-                width : 30px;
+                width : ${motionconst.pipewidth}px;
                 height : ${this.topint}px;
             `;
-            this.reg1.innerHTML = `<img src = "${imagesrc.tpipe}" width = "40px" height = "${this.topint}px"/>`;
+            this.reg1.innerHTML = `<img src = "${imagesrc.tpipe}" width = "${motionconst.pipewidth + 10}px" height = "${this.topint}px"/>`;
             this.reg2.style = `
                 position : absolute;
                 top : ${this.bottomint}px;
                 left : 600px;
-                width : 30px;
+                width : ${motionconst.pipewidth}px;
                 height : ${340 - this.bottomint}px;
             `;
-            this.reg2.innerHTML = `<img src = "${imagesrc.bpipe}" width = "40px" height = "${340 - this.bottomint}px"/>`;
+            this.reg2.innerHTML = `<img src = "${imagesrc.bpipe}" width = "${motionconst.pipewidth + 10}px" height = "${340 - this.bottomint}px"/>`;
             document.body.appendChild(this.reg1);
             document.body.appendChild(this.reg2);
             this.move();
@@ -160,10 +168,11 @@ function startgame(pipetime) {
                 if (this.pos < 30) {
                     curscore++;
                     soundeffects.point();
-                    let x = localStorage.getItem("maxscore")
-                    localStorage.setItem("maxscore", Math.max(x, curscore));
-                    document.getElementById('scores').innerHTML = "score : " + curscore + " maxscore : " +
-                    localStorage.getItem("maxscore");
+                    let x = localStorage.getItem(`maxscore${diff}`)
+                    localStorage.setItem(`maxscore${diff}`, Math.max(x, curscore));
+
+                    document.getElementById('scores').innerHTML = `score : ${curscore} maxscore (${diffstring[diff]}):
+                    ${localStorage.getItem("maxscore" + diff.toString())}`;
                     this.keepmove = false;
                 }
                 if (this.detect()) {
@@ -210,13 +219,34 @@ function startgame(pipetime) {
     document.removeEventListener("click", player.jump, true);
     document.removeEventListener("touchstart", player.jump, true);
 
-    createDOM(pipetime);
+    createDOM(diff);
     soundeffects.setaudio();
 
     player.el = document.getElementById('player');
 
-    motionconst.gameinterval = pipetime;
+    let diffstats = {
+        0 : function () {
+            motionconst.geninterval = 3000;
+            motionconst.pipewidth = 10;
+            motionconst.acc = 500;
+            player.jumpspeed = -320;
+        },
+        1 : function() {
+            motionconst.geninterval = 2000;
+            motionconst.pipewidth = 30;
+            motionconst.acc = 700;
+            player.jumpspeed = -450;
+        },
+        2 : function() {
+            motionconst.geninterval = 1500;
+            motionconst.pipewidth = 50;
+            motionconst.acc = 700;
+            player.jumpspeed = -450;
+        },
+    }
 
+    let initdiff = diffstats[diff];
+    initdiff();
     // creating eventlisteners so that the bird will respond to jumps.
     document.addEventListener("keydown", player.keyRegister, true);
 
@@ -240,12 +270,12 @@ function startgame(pipetime) {
     player.y = 230;
 
 
-    if (localStorage.getItem("maxscore") === null)
-        localStorage.setItem("maxscore", 0);
+    if (localStorage.getItem(`maxscore${diff}`) === null)
+        localStorage.setItem(`maxscore${diff}`, 0);
     let curscore = 0;
 
-    document.getElementById('scores').innerHTML = "score : " + curscore + " maxscore : " +
-    localStorage.getItem("maxscore");
+    document.getElementById('scores').innerHTML = `score : ${curscore} maxscore (${diffstring[diff]}):
+    ${localStorage.getItem("maxscore" + diff.toString())}`;
 
     let runner = setInterval(() => {
         curob.push(new obstacle());
@@ -258,7 +288,7 @@ function startgame(pipetime) {
 }
 
 if (sessionStorage.getItem("diff") === null)
-    startgame(3000);
+    startgame(1);
 else
     startgame(sessionStorage.getItem("diff"));
 

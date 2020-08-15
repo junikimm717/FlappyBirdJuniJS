@@ -18,17 +18,15 @@
 
         </p><br>
         <h3> choose difficulty below : </h3><br>
-        <button onclick = "initialize(0)"> easy </button>
+        <button onclick = "initialize(0)"> easiest </button>
         <button onclick = "initialize(1)"> harder </button>
+        <button onclick = "initialize(2)"> impossible </button>
+
     </body>
 
     <script>
         function initialize(x) {
-            let timeinterval = {
-                0 : 3000,
-                1 : 1000,
-            };
-            sessionStorage.setItem("diff", timeinterval[x]);
+            sessionStorage.setItem("diff", x);
             window.open("./FlappyBirdHTML.html");
         }
     </script>
