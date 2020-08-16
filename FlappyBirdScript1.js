@@ -209,7 +209,6 @@ function startgame(diff) {
             return;
         player.gameover = true;
         soundeffects.fail();
-        document.addEventListener("keydown", player.restart, true);
         document.removeEventListener("keydown", player.keyRegister, true);
         document.removeEventListener("click", player.jump, true);
         document.removeEventListener("touchstart", player.jump, true);
@@ -225,7 +224,6 @@ function startgame(diff) {
         document.getElementById("failmessage").innerHTML = "Failed! Try again!";
 
     }
-    document.removeEventListener("keydown", player.keyRegister, true);
     document.removeEventListener("click", player.jump, true);
     document.removeEventListener("touchstart", player.jump, true);
     document.removeEventListener("keydown", player.restart, true);
