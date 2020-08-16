@@ -141,7 +141,7 @@ function startgame(diff) {
 
     class obstacle {
         constructor() {
-            this.topint = Math.floor((100 - motionconst.pipespace) + (200 - motionconst.pipespace) * Math.random());
+            this.topint = Math.floor(50 + (250 - motionconst.pipespace) * Math.random());
             this.bottomint = this.topint + motionconst.pipespace;
             // bigs here. need to expand the pipespace.
             this.pos = 600;
@@ -241,7 +241,7 @@ function startgame(diff) {
             motionconst.pipewidth = 10;
             motionconst.acc = 500;
             player.jumpspeed = -320;
-            motionconst.pipespace = 150;
+            motionconst.pipespace = 130;
         },
         1 : function() {
             motionconst.geninterval = 2000;
