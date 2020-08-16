@@ -80,6 +80,7 @@ function startgame(diff) {
         geninterval : 3000,
         gameover : false,
         pipewidth : 30,
+        pipespace : 75,
     };
 
     let player = {
@@ -95,6 +96,12 @@ function startgame(diff) {
             if (!(keyPressed === 32 || keyPressed === 87))
                 return;
             player.jump(event);
+        },
+        restart : function() {
+            let keyPressed = event.keyCode ? event.keyCode : event.which;
+            if (!(keyPressed === 82))
+                return;
+            startgame(diff);
         },
         // motions.
         jump : function (event) {
@@ -134,8 +141,9 @@ function startgame(diff) {
 
     class obstacle {
         constructor() {
-            this.topint = Math.floor(50 + 175 * Math.random());
-            this.bottomint = this.topint + 75;
+            this.topint = Math.floor(50 + (250 - motionconst.pipespace) * Math.random());
+            this.bottomint = this.topint + motionconst.pipespace;
+            // bigs here. need to expand the pipespace.
             this.pos = 600;
             this.keepmove = true;
             this.reg1 = document.createElement("Div");
@@ -201,6 +209,7 @@ function startgame(diff) {
             return;
         player.gameover = true;
         soundeffects.fail();
+        document.addEventListener("keydown", player.restart, true);
         document.removeEventListener("keydown", player.keyRegister, true);
         document.removeEventListener("click", player.jump, true);
         document.removeEventListener("touchstart", player.jump, true);
@@ -214,10 +223,12 @@ function startgame(diff) {
         player.el.style.top = "300px";
         document.getElementById("failmessage").style.visibility = "visible";
         document.getElementById("failmessage").innerHTML = "Failed! Try again!";
+
     }
     document.removeEventListener("keydown", player.keyRegister, true);
     document.removeEventListener("click", player.jump, true);
     document.removeEventListener("touchstart", player.jump, true);
+    document.removeEventListener("keydown", player.restart, true);
 
     createDOM(diff);
     soundeffects.setaudio();
@@ -230,23 +241,25 @@ function startgame(diff) {
             motionconst.pipewidth = 10;
             motionconst.acc = 500;
             player.jumpspeed = -320;
+            motionconst.pipespace = 130;
         },
         1 : function() {
             motionconst.geninterval = 2700;
             motionconst.pipewidth = 30;
             motionconst.acc = 700;
             player.jumpspeed = -450;
+            motionconst.pipespace = 75;
         },
         2 : function() {
             motionconst.geninterval = 1500;
             motionconst.pipewidth = 50;
             motionconst.acc = 700;
             player.jumpspeed = -450;
+            motionconst.pipespace = 75;
         },
     }
 
-    let initdiff = diffstats[diff];
-    initdiff();
+    diffstats[diff]();
     // creating eventlisteners so that the bird will respond to jumps.
     document.addEventListener("keydown", player.keyRegister, true);
 
@@ -255,7 +268,6 @@ function startgame(diff) {
     if ('ontouchstart' in window) {
         document.addEventListener("touchstart", player.jump, true);
         motionconst.scale = Math.min(screen.width, screen.height)/704;
-        motionconst.acc = 675;
         player.jumpspeed *= motionconst.scale**motionconst.exp;
         motionconst.acc *= motionconst.scale**motionconst.exp;
     }
