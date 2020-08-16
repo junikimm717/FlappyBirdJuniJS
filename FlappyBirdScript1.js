@@ -241,7 +241,7 @@ function startgame(diff) {
             motionconst.pipewidth = 10;
             motionconst.acc = 500;
             player.jumpspeed = -320;
-            motionconst.pipespace = 150;
+            motionconst.pipespace = 120;
         },
         1 : function() {
             motionconst.geninterval = 2700;
