@@ -259,7 +259,8 @@ function startgame(diff) {
         },
     }
 
-    diffstats[diff]();
+    let difffunc = diffstats[diff];
+    difffunc();
     // creating eventlisteners so that the bird will respond to jumps.
     document.addEventListener("keydown", player.keyRegister, true);
 
